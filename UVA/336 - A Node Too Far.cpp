@@ -1,9 +1,8 @@
 #include<bits/stdc++.h>
 using namespace std;
 map<int,vector<int> > Graph;
-map<int,int> visited;
-int ara[100000];
-int graphTravels(int root, int dis){
+
+int graphTravels(int root, int dis, map<int,int> visited){
     int visitCount = 1;
     queue<int> Q;
     Q.push(root);
@@ -11,7 +10,6 @@ int graphTravels(int root, int dis){
     while(!Q.empty()){
         int u, sz;
         u = Q.front();
-        ara[0] = u;
         Q.pop();
         sz = Graph[u].size();
         for(int i = 0; i < sz ; i++){
@@ -32,6 +30,7 @@ int graphTravels(int root, int dis){
 }
 
 int main(){
+    map<int,int> visited;
     int node, a, b, root, dis, cs = 1;
     while(cin>>node,node){
         for(int i = 0; i < node ;i++){
@@ -44,9 +43,8 @@ int main(){
 
         while(cin >> root >> dis, root, dis){
             int sz = Graph.size();
-            int visit = graphTravels(root,dis);
+            int visit = graphTravels(root,dis,visited);
             cout << visit << endl;
-            cout << "-" << endl;
             //printf("Case %d: %d nodes not reachable from node %d with TTL = %d.\n",cs,sz-visit,root,dis);
             cs++;
         }
