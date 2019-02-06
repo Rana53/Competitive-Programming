@@ -3,7 +3,6 @@
 #define LL long long
 using namespace std;
 vector < LL > factorial;
- 
 void factorialConstruct(LL n){
     factorial.resize(n);
     factorial[0] = 1;
@@ -11,8 +10,6 @@ void factorialConstruct(LL n){
         factorial[i] = (i*factorial[i-1])%M;
     }
 }
- 
- 
 LL modularInverse(LL a,LL p){
     if(p == 1)
         return a;
@@ -21,13 +18,11 @@ LL modularInverse(LL a,LL p){
         long long res = modularInverse(a,p/2);
         return (res%M)*(res%M)%M;
     }
- 
 }
- 
 int main(){
     int t, tc= 1;
     factorialConstruct(1000005);
- 
+
     cin >> t;
     while(t--){
         LL n, r , result;
