@@ -7,7 +7,6 @@ int maxValueInArray(int *ara, int n){
     }
     return maxValue;
 }
-
 void sortArray(int *ara, int n){
     int  output[n];
     int maxVal = maxValueInArray(ara,n);
@@ -26,7 +25,6 @@ void sortArray(int *ara, int n){
     for(int i = 0; i < n; i++)
         ara[i] = output[i];
 }
-
 int main(){
     int n, m,ara[100], person1, person2;
     scanf("%d",&n);
@@ -39,7 +37,6 @@ int main(){
         for(int i = 0; i < m; i++)
             printf(" %d",ara[i]);
         printf("-------\n");
-
         person1 = 0;
         person2 = 0;
         for(int i = m - 1; i >= 0; i--){
