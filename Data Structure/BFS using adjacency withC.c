@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-#define MaxNode 10
+#define MaxNode 100
 
 typedef struct Node{
     int vertex;
@@ -58,7 +58,7 @@ int main(){
     int n, i, u, v;
     makeGraph();
     scanf("%d",&n); // here n is number of edge
-    for(i = 0; i < n; i++){
+    for(i = 0; i < n - 1; i++){
         scanf("%d %d",&u, &v);
         addNode(u,v);
         addNode(v,u);

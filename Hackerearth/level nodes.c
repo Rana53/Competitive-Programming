@@ -1,47 +1,66 @@
 #include<stdio.h>
-#include<stdbool.h>
-#include<string.h>
+#include<stdlib.h>
+#define MaxNode 100001
+typedef struct Node{
+    int vertex;
+    struct Node *next;
+}Node;
 
-int Graph[100001][100001];
-bool visited[100001];
-int level[100001];
-int l;
-int count = 0;
+typedef struct Graph{
+    Node *head;
+}Graph;
+// Global data type
+Graph *graph[MaxNode] = {0};
+int level
 
-void BFS(void){
-    int queue[11], qPos = 0, qLimit, u, v;
-    queue[qPos] = 1;
-    visited[1] = 1;
-    level[1] = 0;
-    qLimit = 1;
-    while(qPos < qLimit){
-        u = queue[qPos];
-        qPos++;
-        //printf("queue");
-        for(v = 0; v < 100001; v++){
-            if(Graph[u][v] && !(visited[v])){
-                queue[qLimit++] = v;
-                level[v] = level[u] + 1;
-                visited[v] = 1;
-                if(level[v] == l)
-                    count++;
-            }
+
+void graphInitialize(){
+    int i;
+    for(i = 0; i < MaxNode; i++){
+        graph[i] = (Graph *)malloc(sizeof(Graph));
+        graph[i]->head = NULL;
+    }
+}
+void addNode(int u, int v){
+    printf("Work   u = %d v = %d\n",u,v);
+    Node *newNode, *ptr;
+
+    newNode = (Node *)malloc(sizeof(Node));
+    newNode->vertex = v;
+    newNode->next = NULL;
+
+    if(graph[u]->head == NULL)
+        graph[u]->head = newNode;
+    else{
+        ptr = graph[u]->head;
+        while(ptr->next != NULL)
+            ptr = ptr->next;
+        ptr->next = newNode;
+    }
+}
+void printList(int n){
+    int i;
+    Node *node;
+    for(i = 1; i < n ; i++){
+        printf("%d",i);
+        for(node = graph[i]->head; node->next!=NULL; node = node->next){
+            printf(" %d",node->vertex);
         }
+        printf(" %d",node->vertex);
+        printf("\n");
     }
 }
 
 int main(){
     int n, i, u, v;
-    scanf("%d",&n);
-    memset(level,0,sizeof(level));
-    memset(visited,0,sizeof(visited));
-    for( i = 1; i < n; i++){
-        scanf("%d %d",&u ,&v);
-        Graph[u][v] = 1;
+    scanf("%d", &n);
+    graphInitialize();
+    for(i = 1; i < n; i++){
+        scanf("%d %d",&u, &v);
+        addNode(u,v);
+        addNode(v,u);
     }
     scanf("%d",&l);
-    BFS();
-    printf("%d\n",count);
-
+   // printList(n);
     return 0;
 }
