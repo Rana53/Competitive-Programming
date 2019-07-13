@@ -1,3 +1,4 @@
+//Accepted
 #include<stdio.h>
 #include<stdlib.h>
 #define MaxNode 100001
@@ -9,11 +10,13 @@ typedef struct Node{
 typedef struct Graph{
     Node *head;
 }Graph;
+
 // Global data type
 Graph *graph[MaxNode] = {0};
-int level
+int level[MaxNode];
+int visited[MaxNode];
 
-
+// defined function here
 void graphInitialize(){
     int i;
     for(i = 0; i < MaxNode; i++){
@@ -22,7 +25,7 @@ void graphInitialize(){
     }
 }
 void addNode(int u, int v){
-    printf("Work   u = %d v = %d\n",u,v);
+  //  printf("Work   u = %d v = %d\n",u,v);
     Node *newNode, *ptr;
 
     newNode = (Node *)malloc(sizeof(Node));
@@ -51,8 +54,41 @@ void printList(int n){
     }
 }
 
+int BFS(int l){
+    int queue[100001], qPos, qLimit, u, v, count = 0;
+    qPos = 0;
+    queue[qPos] = 1;
+    qLimit = 1;
+    visited[1] = 1;
+    level[1] = 1;
+    while(qPos < qLimit){
+        u = queue[qPos++];
+        if(level[u] == l) count ++;
+        Node * node = graph[u]->head;
+        if(node != NULL){
+            for( ; node->next != NULL; node = node->next){
+                v = node->vertex;
+                if(!visited[v]){
+                    queue[qLimit++] = v;
+                    visited[v] = 1;
+                    level[v] = level[u] + 1;
+                }
+            }
+            v = node->vertex;
+            if(!visited[v]){
+                queue[qLimit++] = v;
+                visited[v] = 1;
+                level[v] = level[u] + 1;
+            }
+        }
+
+    }
+    return count;
+}
+
+//main function
 int main(){
-    int n, i, u, v;
+    int n, i, u, v, l;
     scanf("%d", &n);
     graphInitialize();
     for(i = 1; i < n; i++){
@@ -61,6 +97,7 @@ int main(){
         addNode(v,u);
     }
     scanf("%d",&l);
+    printf("%d\n",BFS(l));
    // printList(n);
     return 0;
 }
