@@ -4,12 +4,12 @@
 
 typedef struct Node{
     int vertex;
-    Node *next;
+    struct Node *next;
 
 }Node;
-typedef Graph{
-    Node *next;
-};
+typedef struct Graph{
+    Node *head;
+}Graph;
 Graph *graph[maxPerson] = {0};
 void graphInitialze(){
     int i;
@@ -18,12 +18,34 @@ void graphInitialze(){
         graph[i]->head = NULL;
     }
 }
+void addNode(int u, int v){
+  //  printf("Work   u = %d v = %d\n",u,v);
+    Node *newNode, *ptr;
 
+    newNode = (Node *)malloc(sizeof(Node));
+    newNode->vertex = v;
+    newNode->next = NULL;
+
+    if(graph[u]->head == NULL)
+        graph[u]->head = newNode;
+    else{
+        ptr = graph[u]->head;
+        while(ptr->next != NULL)
+            ptr = ptr->next;
+        ptr->next = newNode;
+    }
+}
 int main(){
-     int t, p, d;
+     int t, p, d, i , u , v;
      scanf("%d",&t);
      while(t--){
-         puts();
+         puts("");
+         graphInitialze();
+         scanf("%d %d",&p,&d);
+         for(i = 0; i < d; i++){
+             scanf("%d %d",&u,&v);
+             addNode(u, v);
+         }
 
      }
 
