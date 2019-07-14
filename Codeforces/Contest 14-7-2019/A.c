@@ -7,4 +7,4 @@ int main(){
         printf("%d\n",x*2);
     }
     return 0;
-}
+} 
