@@ -33,9 +33,7 @@ int main(){
                 posCol = j;
             }
         }
-        if(posCol == posRow && line[posRow][posCol]=='.')
-            printf("%d\n",(m+n)-(maxStrInCol+maxStrInRow+1));
-        else
+
             printf("%d\n",(m+n)-(maxStrInCol+maxStrInRow));
     }
 
