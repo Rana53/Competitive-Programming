@@ -1,6 +1,7 @@
-
-#include<bits/stdc++.h>
-using namespace std;
+#include<stdio.h>
+#include<stdbool.h>
+#include<stdlib.h>
+#include<string.h>
 struct Point{
     int x, y;
 };

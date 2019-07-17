@@ -1,3 +1,5 @@
+//some thing wrong in queue implemntaion by using array
+
 #include<stdio.h>
 #include<stdbool.h>
 
