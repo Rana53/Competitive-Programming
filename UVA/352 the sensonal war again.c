@@ -1,7 +1,6 @@
-#include<stdio.h>
-#include<stdbool.h>
-#include<stdlib.h>
-#include<string.h>
+
+#include<bits/stdc++.h>
+using namespace std;
 struct Point{
     int x, y;
 };
@@ -19,7 +18,7 @@ void inti(int n){
         for( jj = 0; jj < n; jj++){
             visited[ii][jj] = 0;
         }
-        grid[ii][0] = '\0';
+       // grid[ii][0] = '\0';
     }
 }
 
@@ -32,10 +31,11 @@ bool valid(struct Point point){
     return true;
 }
 void BFS(int x , int y){
+    int qPos = 0, qLimit, k;
     struct Point point, newPoint, queue[1000];
     point.x  = x;
     point.y = y;
-    int qPos = 0, qLimit, k;
+
     queue[qPos]= point;
     qLimit = 1;
     visited[point.x][point.y] = 1;
@@ -53,19 +53,21 @@ void BFS(int x , int y){
 }
 
 int main(){
+   /*
     FILE *fileIn, *fileOut;
     fileIn = fopen("352in.txt","r");
     fileOut = fopen("352out.txt","w");
-
-    int n, i, j, number = 0;
-    while(fscanf(fileIn,"%d",&n) !=EOF){
+*/
+    int n, i, j, number = 0, count ;
+    while(scanf("%d",&n)== 1){
         inti(n);
         number++;
         for( i = 0; i < n; i++){
-            fscanf(fileIn,"%s",grid[i]);
+            scanf("%s",grid[i]);
+        //    fscanf(fileIn,"%s",grid[i]);
         }
         sz = n;
-        int count = 0;
+        count = 0;
         for(i = 0; i < n; i++){
             for(j = 0; j < n; j++){
                 if(grid[i][j]=='1' && !(visited[i][j])){
@@ -75,16 +77,19 @@ int main(){
             }
 
         }
+        printf("Image number %d contains %d war eagles.\n", number, count);
+       /*
         fprintf(fileOut,"%s","Image number ");
         fprintf(fileOut,"%d",number);
         fprintf(fileOut,"%s"," contains ");
         fprintf(fileOut,"%d",count);
         fprintf(fileOut,"%s"," war eagles.");
         fprintf(fileOut,"\n");
+        */
     }
 
-    fclose(fileOut);
-    fclose(fileIn);
+    //fclose(fileOut);
+    //fclose(fileIn);
 
     return 0;
 }
