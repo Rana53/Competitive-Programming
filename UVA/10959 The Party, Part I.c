@@ -3,6 +3,7 @@
 #include<stdlib.h>
 #include<stdbool.h>
 
+#define maxPerson 1000
 typedef struct Node{
     int vertex;
     struct Node *next;
@@ -28,7 +29,6 @@ void graphInitialze(int n){
 void addNode(int u, int v){
   //  printf("Work   u = %d v = %d\n",u,v);
     Node *newNode, *ptr;
-
     newNode = (Node *)malloc(sizeof(Node));
     newNode->vertex = v;
     newNode->next = NULL;
