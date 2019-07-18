@@ -1,6 +1,7 @@
-#include<iostream>
-
-#define maxPerson 1000
+//Same code accepted by C++ but compiler error in C
+#include<stdio.h>
+#include<stdlib.h>
+#include<stdbool.h>
 
 typedef struct Node{
     int vertex;
@@ -73,6 +74,7 @@ void BFS(void){
 
 int main(){
      int t, p, d, i , u , v;
+     bool is = false;
      scanf("%d",&t);
      while(t--){
         // puts("");
@@ -84,10 +86,12 @@ int main(){
              addNode(v, u);
          }
          BFS();
+         if(is)
+             printf("\n");
          for(i = 1;i < p; i++)
              printf("%d\n",personLevel[i]);
-         if(!(t-1))
-             printf("\n");
+
+         is = true;
      }
 
     return 0;
