@@ -1,5 +1,5 @@
 #include<iostream>
-
+#include<cstdio>
 #define maxPerson 1000
 
 typedef struct Node{
@@ -73,6 +73,7 @@ void BFS(void){
 
 int main(){
      int t, p, d, i , u , v;
+     bool is = false;
      scanf("%d",&t);
      while(t--){
         // puts("");
@@ -84,10 +85,12 @@ int main(){
              addNode(v, u);
          }
          BFS();
+         if(is)
+             printf("\n");
          for(i = 1;i < p; i++)
              printf("%d\n",personLevel[i]);
-         if(!(t-1))
-             printf("\n");
+
+         is = true;
      }
 
     return 0;
