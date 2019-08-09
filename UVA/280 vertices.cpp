@@ -7,6 +7,7 @@ int visited[101];
 
 using namespace std;
 int DFS(int root){
+    memset(visited,0,sizeof(visited));
     int count = 0;
     int stack[101], siz = 0, u, v;
     stack[siz++] = root;
@@ -14,9 +15,7 @@ int DFS(int root){
         u = stack[--siz];
         for(int i = 0; i < sz[u]; i++){
             v = graph[u][i];
-            cout << "Visited " << v << endl;
             if(!visited[v]){
-                //cout << "Visited " << v << endl;
                 stack[siz++] = v;
                 count++;
                 visited[v] = 1;
@@ -47,11 +46,14 @@ int main(){
         }
         cin >> lineN;
         while(lineN--){
-            memset(visited,0,sizeof(visited));
             cin >> root;
-            cout << root << endl;
             int count = DFS(root);
-            cout << n - count << endl;
+            cout << n - count;
+            for(int i = 1; i <= n; i++){
+                if(!visited[i])
+                    cout <<" " << i;
+            }
+            cout << endl;
         }
     }
 
