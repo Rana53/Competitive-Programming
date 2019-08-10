@@ -20,10 +20,10 @@ bool valid(Point point){
     return true;
 }
 
-bool DFS(Point point){
+bool BFS(Point point){
     int visited[n][n];
     memset(visited,0,sizeof(visited));
-    Point Q[5000],qPoint, newPoint;
+    Point Q[40000],qPoint, newPoint;
     int qPos, qsize;
     qPos = 0;
     qsize = 1;
@@ -34,19 +34,14 @@ bool DFS(Point point){
         for(int i = 0; i < 6; i++){
             newPoint.row = qPoint.row + fx[i];
             newPoint.col = qPoint.col + fy[i];
-            if(valid(newPoint) &&
-               grid[newPoint.row][newPoint.col] == 'b' &&
-               visited[newPoint.row][newPoint.col] == 0)
+            if(valid(newPoint) && grid[newPoint.row][newPoint.col] == 'b' && visited[newPoint.row][newPoint.col] == 0)
             {
                  Q[qsize++] = newPoint;
                  visited[newPoint.row][newPoint.col] = 1;
-                 if(newPoint.row + 1 == n || newPoint.col + 1 == n){
+                 if(newPoint.row + 1 == n || newPoint.col + 1 == n)
                      return true;
-                 }
-
             }
         }
-
     }
     return false;
 }
@@ -57,12 +52,12 @@ int main(){
     int count = 1;
     while(cin>>n,n){
         for(int i = 0; i < n; i++)
-            cin >> grid[i];
+            scanf("%s",grid[i]);
 
         for(int i = 0; i < n; i++){
             if(grid[0][i] == 'b'){
                 point.row = 0, point.col = i;
-                blackWin = DFS(point);
+                blackWin = BFS(point);
                 if(blackWin) break;
             }
         }
