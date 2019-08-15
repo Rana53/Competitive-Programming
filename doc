@@ -1,0 +1,3 @@
+scanf(%[^\n]) take newline with empty string
+gets() take empty string not new line 
+

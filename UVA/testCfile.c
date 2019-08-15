@@ -11,21 +11,13 @@ void DFS(int a, int b){
    // printf("coordinate : %d , %d\n",a,b);
     if(a < 0 || b < 0 || grid[a][b] == 0)
         return ;
-    if(visited[a][b] == -1 || grid[a][b] != 'W')
+    if(visited[a][b] != 0 || grid[a][b] != 'W')
         return ;
-    if(visited[a][b] && grid[a][b] == 'W'){
-        ans = visited[a][b];
-        return;
-    }
-    visited[a][b] = -1;
+    visited[a][b] = 1;
     ans++;
     int i;
-    for(i = 0; i < 8; i++){
+    for(i = 0; i < 8; i++)
         DFS(a+fx[i],b+fy[i]);
-    }
-    cout << "Answer " << ans << endl;
-    visited[a][b] = ans;
-    //printf("Qord");
 }
 
 int main(){
@@ -36,7 +28,6 @@ int main(){
     while(t--){
         n = 0;
         memset(grid,0,sizeof(grid));
-        memset(visited,0,sizeof(visited));
         getchar();
         while(scanf("%[^\n]",str)){
             getchar();
@@ -47,6 +38,7 @@ int main(){
             }
             else{
                 ans = 0;
+                memset(visited,0,sizeof(visited));
                 sscanf(str,"%d %d",&a,&b);
                 DFS(a-1,b-1);
                 printf("%d\n",ans);
