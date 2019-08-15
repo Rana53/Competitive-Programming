@@ -5,6 +5,7 @@
 
 using namespace std;
 char grid[105][105];
+int visited[105][105];
 int a , b;
 int fx[] = {-1,+1, 0, 0 ,-1, +1, -1, +1};
 int fy[] = {0 , 0,+1,-1, -1, +1, +1, -1};
@@ -23,8 +24,8 @@ bool valid(Point point){
 }
 
 int BFS(Point point){
-    int visited[105][105];
-    memset(visited,0,sizeof(visited));
+    if(visited[point.r][point.c])
+        return visited[point.r][point.c];
     Point Q[10000], newPoint, qPoint;
     int qPos, qLimit, count = 1;
     qPos = 0, qLimit = 1;
@@ -42,6 +43,8 @@ int BFS(Point point){
            }
         }
     }
+    for(int i = 0; i < qLimit; i++)
+        visited[Q[i].r][Q[i].c] = count;
     return count;
 }
 
@@ -54,7 +57,8 @@ int main(){
     getchar();
     while(t--){
         memset(grid,0,sizeof(grid));
-        cin.get();
+        memset(visited,0,sizeof(visited));
+        getchar();
         szN = 0;
         once = true;
         while(scanf("%[^\n]",grid[szN])){
