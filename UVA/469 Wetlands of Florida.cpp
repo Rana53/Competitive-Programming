@@ -3,43 +3,26 @@
 #include<cstdio>
 
 using namespace std;
-char grid[100][100];
-char line[10];
+char grid[105][105];
 int a , b;
 int fx[] = {-1,+1, 0, 0 ,-1, +1, -1, +1};
 int fy[] = {0 , 0,+1,-1, -1, +1, +1, -1};
-int sz;
+int szN, szM;
 
 struct Point{
    int r, c;
 };
-void getIJInAB(){
-    int len, mul,i;
-    a = 0;
-    b = 0;
-    mul = 1;
-    len = strlen(line);
-    for(i = len - 1; line[i] != ' '; i--){
-        b += mul *(line[i] - '0');
-        mul *= 10;
-    }
-    for(i--,mul = 1; i>= 0; i--){
-        a += mul *(line[i] - '0');
-        mul *= 10;
-    }
-   // cout << "Print a b " << a << "  -- " << b << endl;
-}
 
 bool valid(Point point){
     if(point.r < 0 || point.c < 0)
         return false;
-    if(point.r >= sz || point.c >= sz)
+    if(grid[point.r][point.c] != 'W')
         return false;
     return true;
 }
 
 int BFS(Point point){
-    int visited[sz][sz];
+    int visited[105][105];
     memset(visited,0,sizeof(visited));
     Point Q[10000], newPoint, qPoint;
     int qPos, qLimit, count = 1;
@@ -51,8 +34,7 @@ int BFS(Point point){
         for(int i = 0; i < 8; i++){
            newPoint.r = qPoint.r + fx[i];
            newPoint.c = qPoint.c + fy[i];
-           if(valid(newPoint) && !(visited[newPoint.r][newPoint.c])&& grid[newPoint.r][newPoint.c] == 'W'){
-               cout <<"adj point " << newPoint.r << " - " << newPoint.c << endl;
+           if(valid(newPoint) && !(visited[newPoint.r][newPoint.c])){
                Q[qLimit++] = newPoint;
                visited[newPoint.r][newPoint.c] = 1;
                count++;
@@ -63,29 +45,30 @@ int BFS(Point point){
 }
 
 int main(){
-    int t, len, n, ans;
-    char enterCheck;
+
+    bool once;
+    int t, n, ans;
     Point point;
-    cin >> t;
-    cout << endl;
+    scanf("%d",&t);
+    getchar();
     while(t--){
-        cin >> grid[0];
-        n = strlen(grid[0]);
-        sz = n;
-        for(int i = 1; i < n; i++)
-            cin >> grid[i];
+        memset(grid,0,sizeof(grid));
         cin.get();
-        while(scanf("%[^\n]",line)){
-            cin.get();
-            if(line[0]=='\n') break;
-            getIJInAB();
-            point.r = a - 1;
-            point.c = b - 1;
-            ans = BFS(point);
-            cout << "Output - " << ans << endl;
+        szN = 0;
+        once = true;
+        while(scanf("%[^\n]",grid[szN])){
+            getchar();
+            if(grid[szN][0] == '\0') break;
+            if(grid[szN][0] == 'W' || grid[szN][0] == 'L') szN++;
+            else{
+                sscanf(grid[szN],"%d %d",&a,&b);
+                point.r = a - 1;
+                point.c = b - 1;
+                ans = BFS(point);
+                printf("%d\n",ans);
+            }
         }
-        if(t) cout << endl;
+        if(t) printf("\n");
     }
     return 0;
 }
-
