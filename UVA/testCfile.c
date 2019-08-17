@@ -8,6 +8,11 @@ int fx[] = {-1,+1, 0, 0 ,-1, +1, -1, +1};
 int fy[] = {0 , 0,+1,-1, -1, +1, +1, -1};
 int ans;
 void DFS(int a, int b){
+    if(visited[a][b]){
+        printf("Yes First Time ");
+        ans = visited[a][b];
+        return;
+    }
     int i;
     if(a < 0 || b < 0 || grid[a][b] == 0)
         return ;
@@ -17,6 +22,7 @@ void DFS(int a, int b){
     ans++;
     for(i = 0; i < 8; i++)
         DFS(a+fx[i],b+fy[i]);
+    visited[a][b] = ans;
 }
 
 int main(){
