@@ -53,16 +53,15 @@ int main(){
     bool once;
     int t, n, ans;
     Point point;
-    scanf("%d",&t);
-    getchar();
+    scanf("%d ",&t);
     while(t--){
         memset(grid,0,sizeof(grid));
         memset(visited,0,sizeof(visited));
-        getchar();
+        //getchar();
         szN = 0;
         once = true;
         while(scanf("%[^\n]",grid[szN])){
-            getchar();
+          //  getchar();
             if(grid[szN][0] == '\0') break;
             if(grid[szN][0] == 'W' || grid[szN][0] == 'L') szN++;
             else{
