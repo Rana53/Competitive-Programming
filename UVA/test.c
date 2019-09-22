@@ -16,11 +16,11 @@ void dfs(int x, int y) {
             dfs(x+i, y+j);
 }
 int main() {
-    printf("%d",'A');
+    printf("%d",'z');
     int t, i, j;
     char str[105];
     scanf("%d ", &t);
-    while(t--) {
+    while(t--){
         memset(map, 0, sizeof(map));
         int n = 0;
         while(gets(str)) {
@@ -42,4 +42,4 @@ int main() {
     }
     return 0;
 }
-*/
+
