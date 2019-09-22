@@ -15,6 +15,17 @@ int valid(int i, int j){
     return 1;
 }
 void printResult(){
+    int align[col];
+    memset(align, 0, sizeof(align));
+
+        for(j = 0; j < col; j+= 2){
+            for(i = 0; i < row; i++){
+                if(align[i][j] <= grid[i][j])
+                    align[i][j] = grid[i][j];
+                    align[i][j] = grid[i][j];
+            }
+        }
+    }
     int i , j;
     for(i = 0; i < row; i++){
         for(j = 0; j < col; j++)
